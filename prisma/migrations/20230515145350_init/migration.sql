@@ -1,13 +1,4 @@
 -- CreateTable
-CREATE TABLE "Product" (
-    "id" SERIAL NOT NULL,
-    "title" VARCHAR(255) NOT NULL,
-    "manufacturerId" INTEGER NOT NULL,
-
-    CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "email" TEXT NOT NULL,
@@ -15,6 +6,15 @@ CREATE TABLE "User" (
     "password" TEXT NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Product" (
+    "id" SERIAL NOT NULL,
+    "title" VARCHAR(255) NOT NULL,
+    "manufacturerId" INTEGER NOT NULL,
+
+    CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
