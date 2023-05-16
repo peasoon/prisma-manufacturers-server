@@ -18,7 +18,6 @@ const createProduct = async (req, res) => {
 
     const createdProduct = await prisma.product.create({
       data: {
-        // create the new Post for this User
         title: title,
         manufacturer: {
           connect: {
@@ -32,6 +31,36 @@ const createProduct = async (req, res) => {
   }
 };
 
+const getAllProducts = async (req, res) => {
+  try {
+    const products = await prisma.product.findMany();
+    return res.status(200).json(products);
+  } catch (err) {
+    return res.status(500).json({ message: "Ошибка базы данных" });
+  }
+};
+
+const getUserProducts = async (req, res, next) => {
+  const { user: userId } = req.query;
+  if (userId) {
+    const userProducts = await prisma.user.findUnique({
+      where: {
+        id: Number(userId),
+      },
+      include: { products: true },
+    });
+    return res
+      .status(200)
+      .json(
+        userProducts ? userProducts : { message: "Пользователь не найден" }
+      );
+  } else {
+    next();
+  }
+};
+
 module.exports = {
   createProduct,
+  getUserProducts,
+  getAllProducts,
 };
