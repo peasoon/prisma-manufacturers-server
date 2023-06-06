@@ -14,6 +14,6 @@ const auth = require("../middlewares/auth.js");
 //router.get('/', getAllUsers);
 //router.get('/:id', getSingleUser);
 router.post("/register", isEmailExist, registerUser);
-router.get("/login", login);
+router.post("/login", login);
 
 module.exports = router;
